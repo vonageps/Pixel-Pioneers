@@ -1,0 +1,99 @@
+<div fxLayout="row wrap" fxFlex="100">
+  <ng-container *ngIf="!loader">
+    <div fxLayout="row wrap" class="upload-header" fxFlex="100">
+      <div fxLayout="row wrap" fxLayoutAlign="start" fxFlex="100">
+        <div fxFlex="100" appearance="standard" class="header">
+          <h3>
+            Upload Document
+            <button class="btn-close">
+              <mat-icon svgIcon="close" [mat-dialog-close]="false"></mat-icon>
+            </button>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div
+      fxLayout="row wrap"
+      fxflex="100"
+      fxLayoutAlign="center center"
+      class="dropzone-container"
+      (drop)="onFileDropped($event)"
+      (dragover)="onDragOver($event)"
+    >
+      <div class="dropzone">
+        <div class="actions" DragAndDropDir>
+          <input
+            type="file"
+            #fileDropRef
+            *ngIf="!isMultipleFiles"
+            id="fileDropRef"
+            (change)="fileBrowseHandler($event)"
+          />
+          <button
+            for="fileDropRef"
+            class="custom-primary-button browsefilebutton"
+            mat-stroked-button
+            color="primary"
+          >
+            <img src="assets/images/svg/feather_upload-cloud.svg" />
+
+            <div class="note">
+              Drag and drop or <br /><span>Browse</span> to choose a file
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="info">File Supported: <span>Pdf</span></div>
+      <div class="uploaded-list">
+        <ul class="files" *ngFor="let file of files">
+          <li>
+            <div class="file-list">
+              <div class="file-details">
+                <div class="file-img">
+                  <img src="assets/images/svg/pdf.svg" />
+                </div>
+                <div class="details-box">
+                  <p class="name">{{ file.name }}</p>
+                  <ul>
+                    <li>1 Nov 2023</li>
+                  </ul>
+                </div>
+              </div>
+              <button class="btn-transparent" (click)="remove(file)">
+                <mat-icon svgIcon="trash"></mat-icon>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      fxFlex="100"
+      fxLayout="row wrap"
+      fxLayoutAlign="end center"
+      class="footer p-4"
+    >
+      <button
+        mat-stroked-button
+        color="primary"
+        id="ps-joinCall"
+        class="btn-outline mr-4"
+        *ngIf="false"
+      >
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        id="ps-joinCall"
+        class="btn-common"
+        (click)="uploadtoS3Bucket(files[0])"
+      >
+        Upload
+      </button>
+    </div>
+  </ng-container>
+  <div class="custom-spinner" *ngIf="loader">
+    <div class="lds-dual-ring"></div>
+  </div>
+</div>

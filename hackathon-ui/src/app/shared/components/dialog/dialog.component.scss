@@ -1,0 +1,11 @@
+@import '../../../theme/styles/variables';
+@import '../../../theme/styles/breakpoints';
+.custom-heading {
+  line-height: initial;
+  color: $secondary-theme-color;
+  font-weight: 600;
+}
+p {
+  font-size: 16px;
+  color: $light-gray;
+}

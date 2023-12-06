@@ -1,0 +1,122 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: database-migration
+spec:
+  template:
+    metadata:
+      name: database-migration
+    spec:
+      tolerations:
+        - key: 'type'
+          operator: 'Equal'
+          value: 'hackathon-spot'
+          effect: 'NoSchedule'
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: database-migration
+          image: node:18-bullseye-slim
+          command:
+            [
+              'sh',
+              '-c',
+              'apt-get update && apt-get install git-core -y && git clone https://oauth2:$GITHUB_TOKEN@github.com/sourcefuse/hackathon-poc-careconnect-api -b ${MIGRATION_BRANCH} && cd hackathon-poc-careconnect-api/packages/migrations  && npm install && npm run db:migrate',
+            ]
+          env:
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: GITHUB_TOKEN
+            - name: MIGRATION_BRANCH
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: MIGRATION_BRANCH
+            - name: RDS_SSL_FLAG
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: RDS_SSL_FLAG
+            - name: RDS_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AWS_REGION
+            - name: AUTH-SERVICE_DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AUTH-SERVICE_DB_HOST
+            - name: AUTH-SERVICE_DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AUTH-SERVICE_DB_PORT
+            - name: AUTH-SERVICE_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AUTH-SERVICE_DB_USER
+            - name: AUTH-SERVICE_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AUTH-SERVICE_DB_PASSWORD
+            - name: AUTH-SERVICE_DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AUTH-SERVICE_DB_DATABASE
+            - name: SCHEDULER-SERVICE_DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: SCHEDULER-SERVICE_DB_HOST
+            - name: SCHEDULER-SERVICE_DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: SCHEDULER-SERVICE_DB_PORT
+            - name: SCHEDULER-SERVICE_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: SCHEDULER-SERVICE_DB_USER
+            - name: SCHEDULER-SERVICE_DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: SCHEDULER-SERVICE_DB_DATABASE
+            - name: SCHEDULER-SERVICE_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: SCHEDULER-SERVICE_DB_PASSWORD
+            - name: VIDEO-CONFERENCING-SERVICE_DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: VIDEO-CONFERENCING-SERVICE_DB_HOST
+            - name: VIDEO-CONFERENCING-SERVICE_DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: VIDEO-CONFERENCING-SERVICE_DB_PORT
+            - name: VIDEO-CONFERENCING-SERVICE_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: VIDEO-CONFERENCING-SERVICE_DB_USER
+            - name: VIDEO-CONFERENCING-SERVICE_DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: VIDEO-CONFERENCING-SERVICE_DB_DATABASE
+            - name: VIDEO-CONFERENCING-SERVICE_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: VIDEO-CONFERENCING-SERVICE_DB_PASSWORD
+      restartPolicy: Never

@@ -1,0 +1,35 @@
+{
+  "name": "verificationRest",
+  "connector": "rest",
+  "baseURL": "",
+  "crud": true,
+  "options": {
+    "baseUrl": "VERIFICATION_BASEURL",
+    "headers": {
+      "accept": "application/json",
+      "content-type": "application/json"
+    }
+  },
+  "operations": [
+    {
+      "template": {
+        "method": "POST",
+        "url": "/otp-verify/send-otp",
+        "form": "{body}"
+      },
+      "functions": {
+        "sendOtp": ["body"]
+      }
+    },
+    {
+      "template": {
+        "method": "POST",
+        "url": "/otp-verify/verify",
+        "form": "{body}"
+      },
+      "functions": {
+        "verifyOtp": ["body"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+<div class="form-group" [formGroup]="parentFormGroup" novalidate>
+  <ejs-dropdownlist
+    [formControlName]="controlName"
+    [id]="dropdownId"
+    [dataSource]="dropdownItems"
+    [fields]="dropdownFields"
+    [placeholder]="dropwdownPlaceholder"
+    [filterBarPlaceholder]="filterBarPlaceholder"
+    name="controlName"
+    popupHeight="200px"
+    appendTo="body"
+    cssClass="e-outline"
+    floatLabelType="Auto"
+    (change)="itemChange($event)"
+    [allowFiltering]="allowFiltering"
+    [readonly]="readonly"
+    [ngClass]="{
+      'is-invalid':
+        parentFormGroup.controls[controlName]?.invalid &&
+        parentFormGroup.controls[controlName]?.errors?.required &&
+        parentFormGroup.controls[controlName]?.touched
+    }"
+  >
+    <ng-template *ngIf="template" #itemTemplate let-data>
+      <!-- set the value to itemTemplate property -->
+      <div class="option-dropdown">
+        <div
+          class="user-img"
+          [ngStyle]="{
+            'background-image': data?.photoUrl
+              ? 'url(' + data?.photoUrl + ')'
+              : 'url(' + 'assets/images/avatar.png' + ')'
+          }"
+        ></div>
+        <div class="content">
+          <div class="name">{{ data.fullName }}</div>
+          <div class="email">{{ data.email }}</div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template *ngIf="template" #valueTemplate let-data let-clear="clear">
+      <div class="selected-value">
+        <div
+          class="user-img"
+          [ngStyle]="{
+            'background-image': data?.photoUrl
+              ? 'url(' + data?.photoUrl + ')'
+              : 'url(' + 'assets/images/avatar.png' + ')'
+          }"
+        ></div>
+        <div class="content">
+          <div class="name">{{ data.fullName }}</div>
+          <div class="clear" (click)="clear(data)">
+            <mat-icon>close</mat-icon>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ejs-dropdownlist>
+  <div
+    class="error"
+    *ngIf="
+      parentFormGroup.controls['controlName']?.invalid &&
+      parentFormGroup.controls['controlName']?.errors?.required &&
+      parentFormGroup.controls['controlName']?.touched
+    "
+  >
+    {{ dropwdownError }}
+  </div>
+</div>

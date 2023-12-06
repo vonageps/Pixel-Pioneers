@@ -1,0 +1,54 @@
+<div class="h-100" fxFlexFill>
+  <div class="call-header">
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxFill fxFlex="1 0 auto">
+      <img
+        src="assets/images/logo.svg"
+        class="img-responsive telescope-brand"
+        alt=""
+      />
+    </div>
+  </div>
+  <div class="body-container">
+    <div
+      fxLayout="row wrap"
+      fxFlexFill
+      fxLayoutAlign="space-evenly center"
+      class="inner-bg common-bg"
+    >
+      <div
+        fxFlex="100"
+        fxFlex.gt-lg="25"
+        fxFlex.gt-md="30"
+        fxFlex.gt-sm="50"
+        fxFlex.gt-xs="60"
+        fxFlexFill
+        fxLayoutAlign="center center"
+        class="pos-relative"
+      >
+        <div fxLayout="column" fxLayoutAlign="start" class="w-100">
+          <div fxLayout="row" fxLayoutAlign="center center" class="site-logo">
+            <img src="assets/images/whoopswifi.svg" alt="Care Connect" />
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center" class="site-title">
+            <h1 class="text-center">Whoops!</h1>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center" class="site-title">
+            <p>
+              {{ errMsg }}
+            </p>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center" class="site-title">
+            <button
+              mat-raised-button
+              color="primary"
+              class="btn-common"
+              (click)="retry()"
+            >
+              Reconnect
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

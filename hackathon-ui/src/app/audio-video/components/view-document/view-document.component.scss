@@ -1,0 +1,35 @@
+@import "../../../theme/styles/breakpoints";
+@import "../../../theme/styles/variables";
+:host {
+  width: 100%;
+  display: block;
+  .upload-header {
+    padding: 15px;
+    .header {
+      h3 {
+        width: 93%;
+        padding-right: 30px;
+        position: relative;
+        font-size: 22px;
+        button {
+          background: transparent;
+          position: absolute;
+          right: -5px;
+          border: none;
+        }
+      }
+    }
+  }
+  .dropzone-container {
+    padding: 15px;
+    width: 100%;
+    .view-doc {
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}

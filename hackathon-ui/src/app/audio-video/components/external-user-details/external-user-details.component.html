@@ -1,0 +1,165 @@
+<div class="h-100" fxFlexFill>
+  <div class="call-header">
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxFill fxFlex="1 0 auto">
+      <div
+        fxFlex="100"
+        fxFlex.gt-xs="50"
+        appearance="standard"
+        ngClass.gt-xs="px-5"
+        class="brand-container"
+      >
+        <img
+          src="assets/images/telescope.svg"
+          class="img-responsive telescope-brand"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+  <div *ngIf="skipConfirmation; else confirmation">
+    <div class="body-container common-bg">
+      <div
+        fxLayout="row wrap"
+        fxFlexFill
+        fxLayoutAlign="space-evenly center"
+        class="inner-bg"
+      >
+        <div
+          fxFlex="100"
+          fxFlex.gt-md="30"
+          fxFlex.gt-sm="40"
+          fxFlexFill
+          fxLayoutAlign="center center"
+        >
+          <div fxLayout="column" fxLayoutAlign="start" class="w-100">
+            <div fxLayout="row" fxLayoutAlign="center center" class="site-logo">
+              <img
+                src="assets/images/thank-you.svg"
+                alt="Telescope Health Patient"
+              />
+            </div>
+            <div
+              fxLayout="row"
+              fxLayoutAlign="center center"
+              class="site-title"
+            >
+              <h1 class="text-center">You are being Redirected!</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #confirmation>
+    <div class="body-container common-bg" *ngIf="callAllowed">
+      <div
+        fxLayout="row wrap"
+        fxFlexFill
+        fxLayoutAlign="space-evenly center"
+        class="inner-bg"
+      >
+        <div
+          fxFlex="100"
+          fxFlex.gt-md="30"
+          fxFlex.gt-sm="40"
+          fxFlexFill
+          fxLayoutAlign="center center"
+        >
+          <div fxLayout="column" fxLayoutAlign="start" class="w-100">
+            <div fxLayout="row" fxLayoutAlign="center center" class="site-logo">
+              <img
+                src="assets/images/ring.svg"
+                alt="Telescope Health Patient"
+              />
+            </div>
+            <div
+              fxLayout="row"
+              fxLayoutAlign="center center"
+              class="site-title"
+            >
+              <h1 class="text-center">Please type your name to proceed!</h1>
+            </div>
+            <form
+              #form="ngForm"
+              (ngSubmit)="setDetails()"
+              fxLayout="column"
+              fxLayoutAlign="start"
+            >
+              <div
+                fxLayout="row wrap"
+                fxLayoutAlign="start"
+                fxFlex="1 0 auto"
+                class="site-login"
+              >
+                <mat-form-field fxFlex="100" appearance="outline">
+                  <mat-label>First Name</mat-label>
+                  <input
+                    type="text"
+                    [(ngModel)]="externalUser.firstName"
+                    name="firstName"
+                    matInput
+                    required
+                    [disabled]="isExistingPatient"
+                    id="eud-firstName"
+                  />
+                  <mat-error
+                    *ngIf="form.form.controls['firstName']?.errors?.required"
+                    >First name is required
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="100" appearance="outline" class="mt-4">
+                  <mat-label>Last Name</mat-label>
+                  <input
+                    type="text"
+                    [(ngModel)]="externalUser.lastName"
+                    name="lastName"
+                    matInput
+                    required
+                    [disabled]="isExistingPatient"
+                    id="eud-LastName"
+                  />
+                  <mat-error
+                    *ngIf="form.form.controls['lastName']?.errors?.required"
+                    >Last name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between center">
+                <button
+                  type="submit"
+                  ejs-button
+                  [disabled]="form.invalid"
+                  cssClass="e-primary full-width medium rounded my-6"
+                  id="eud-join"
+                >
+                  Join
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <div class="body-container" *ngIf="!callAllowed">
+    <div
+      fxLayout="row wrap"
+      fxFlexFill
+      fxLayoutAlign="space-evenly center"
+      class="inner-bg"
+    >
+      <div fxLayout="column" fxLayoutAlign="start" class="w-100">
+        <div fxLayout="row" fxLayoutAlign="center center" class="site-logo">
+          <img src="assets/images/ring.svg" alt="Telescope Health Patient" />
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center" class="site-title">
+          <h1 class="text-center">Whoops!</h1>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center" class="site-title">
+          <p>You can not join this call as this call has ended!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

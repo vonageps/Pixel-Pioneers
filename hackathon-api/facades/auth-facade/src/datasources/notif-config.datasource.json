@@ -1,0 +1,45 @@
+{
+  "name": "notifService",
+  "connector": "rest",
+  "baseURL": "",
+  "crud": true,
+  "options": {
+    "baseUrl": "AUTH_SERVICE_URL",
+    "headers": {
+      "accept": "application/json",
+      "content-type": "application/json"
+    }
+  },
+  "operations": [
+    {
+      "template": {
+        "method": "POST",
+        "url": "/send-sms",
+        "body": "{body}"
+      },
+      "functions": {
+        "sendSms": ["body"]
+      }
+    },
+    {
+      "template": {
+        "method": "POST",
+        "url": "/otp-verify/send-otp",
+        "body": "{body}"
+      },
+      "functions": {
+        "sendOtp": ["body"]
+      }
+    },
+    {
+      "template": {
+        "method": "POST",
+        "url": "/otp-verify/verify",
+        "body": "{body}"
+      },
+      "functions": {
+        "verifyOtp": ["body"]
+      }
+    }
+  ]
+}

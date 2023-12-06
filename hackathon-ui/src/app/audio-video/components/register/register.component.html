@@ -1,0 +1,131 @@
+<div class="bg-common">
+  <div class="call-header">
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxFill fxFlex="1 0 auto">
+      <div
+        fxFlex="50"
+        fxFlex.gt-xs="50"
+        appearance="standard"
+        ngClass.gt-xs="px-5"
+        class="brand-container"
+      >
+        <ul>
+          <li>
+            <img
+              src="assets/images/logo.svg"
+              class="img-responsive telescope-brand"
+              alt=""
+            />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    fxLayout="row wrap"
+    fxflex="100"
+    fxLayoutAlign="center center"
+    class="form-outer-container"
+  >
+    <div
+      fxLayout="row wrap"
+      fxFlex="350px"
+      fxLayoutAlign="center center"
+      class="register-container"
+    >
+      <div class="register-header" fxFlex="100">
+        <h3>Register</h3>
+      </div>
+      <form
+        class="register-form"
+        fxFlex="100"
+        fxLayout="row wrap"
+        #form="ngForm"
+      >
+        <mat-form-field
+          class="form-full-width mt-2"
+          fxFlex="100"
+          appearance="outline"
+        >
+          <mat-label>Name</mat-label>
+          <input
+            type="text"
+            name="name"
+            matInput
+            placeholder="Name"
+            [(ngModel)]="user.name"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="form-full-width mt-2"
+          fxFlex="100"
+          appearance="outline"
+        >
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            name="email"
+            matInput
+            placeholder="Email"
+            [(ngModel)]="user.email"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="form-full-width mt-2"
+          fxFlex="100"
+          appearance="outline"
+        >
+          <mat-label>Contact No.</mat-label>
+          <input
+            type="text"
+            name="phone"
+            matInput
+            placeholder="Ex. 9898989898"
+            [(ngModel)]="user.phone"
+          />
+        </mat-form-field>
+        <mat-form-field
+          class="form-full-width mt-2"
+          fxFlex="100"
+          appearance="outline"
+        >
+          <mat-label>DOB</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            name="dob"
+            [(ngModel)]="user.dob"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          fxFlex="100"
+          class="device-dropdown mt-2"
+        >
+          <mat-label>Gender</mat-label>
+          <mat-select name="gender" [(ngModel)]="user.gender">
+            <mat-option value="Male">Male</mat-option>
+            <mat-option value="Female">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div appearance="outline" fxFlex="100">
+          <button
+            mat-button
+            mat-raised-button
+            color="primary"
+            class="btn-common"
+            fxFlex="100"
+            (click)="proceed()"
+          >
+            Submit And Proceed
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

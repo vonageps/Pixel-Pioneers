@@ -1,0 +1,44 @@
+<div fxFlex="100" fxLayout="row wrap">
+  <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center">
+    <div
+      class="user-profile"
+      style="background-image: url('assets/images/user.svg')"
+    >
+      <div class="indicator"></div>
+    </div>
+    <div class="user-name">
+      <p class="name">Jenny</p>
+      <p>AI Assistant</p>
+    </div>
+  </div>
+  <div fxFlex="100" fxLayout="row wrap">
+    <div class="message my-2">
+      <p>
+        Your doctor may be attending to other matters. Would you like to engage
+        with our AI assistant while waiting for the doctor to join the call?
+      </p>
+    </div>
+  </div>
+  <div fxFlex="100" fxLayout="row ">
+    <div fxFlex="50" fxLayout="row wrap" class="p-2">
+      <button
+        mat-stroked-button
+        color="primary"
+        id="ps-joinCall"
+        class="btn-outline"
+      >
+        Keep waiting
+      </button>
+    </div>
+    <div fxFlex="50" fxLayout="row wrap" class="p-2">
+      <button
+        mat-raised-button
+        color="primary"
+        id="ps-joinCall"
+        class="btn-common"
+      >
+        Join Call
+      </button>
+    </div>
+  </div>
+</div>

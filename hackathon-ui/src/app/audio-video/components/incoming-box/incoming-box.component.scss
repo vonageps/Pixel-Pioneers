@@ -1,0 +1,31 @@
+@import "../../../theme/styles/breakpoints";
+@import "../../../theme/styles/variables";
+:host {
+  .user-profile {
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    border: 1px solid $bg-name;
+    margin-right: 10px;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    position: relative;
+    .indicator {
+      height: 13px;
+      width: 13px;
+      position: absolute;
+      bottom: 2px;
+      right: -5px;
+      background: linear-gradient(0deg, #34a853, #34a853),
+        linear-gradient(0deg, #ffffff, #ffffff);
+      border-radius: 100%;
+      border: 3px solid #fff;
+    }
+  }
+  .user-name {
+    .name {
+      font-size: 18px;
+    }
+  }
+}

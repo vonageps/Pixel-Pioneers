@@ -1,0 +1,56 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+     - yum update -y
+     - yum install -y sudo
+     - yum install -y wget curl --allowerasing
+     - sudo yum install yum-utils -y
+     - sudo n 18.16.1
+     - node -v && which node
+     - curl -sS -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/386/aws-iam-authenticator
+     - chmod +x aws-iam-authenticator
+     - sudo mv aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+     - sudo rm /usr/local/bin/kubectl  # Remove the existing binary
+     - sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"  # Download the new binary
+     - sudo chmod +x ./kubectl  # Make it executable
+     - sudo mv ./kubectl /usr/local/bin/kubectl  # Move it to the appropriate directory
+     - export PATH=$PWD/:$PATH
+     - npm install -g lerna@6.6.2
+     - lerna --version
+
+
+  pre_build:
+    commands:
+     - CUSTOM_TAG=$CODEBUILD_RESOLVED_SOURCE_VERSION
+     - echo $CUSTOM_TAG
+     - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
+     - git config --global credential.helper store
+     - git config --global credential.helper cache
+     - git config --global credential.helper 'cache --timeout=6000'
+     - git clone https://$GH_TOKEN@github.com/sourcefuse/hackathon-poc-careconnect-api -b $GITHUB_BRANCH
+     - git config --global user.name "sfdevops"
+     - git config --global user.email "sfdevops@sourcefuse.com"
+     - cd hackathon-poc-careconnect-api
+     
+
+  build:
+    commands:
+     - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+     - sts=$(aws sts assume-role --role-arn "$ROLE_ARN" --role-session-name "$OUTPUT_PROFILE")
+     - aws configure set aws_access_key_id $(echo "${sts}" | jq -r '.Credentials.AccessKeyId') --profile $OUTPUT_PROFILE
+     - aws configure set aws_secret_access_key $(echo "${sts}" | jq -r '.Credentials.SecretAccessKey') --profile $OUTPUT_PROFILE
+     - aws configure set aws_session_token $(echo "${sts}" | jq -r '.Credentials.SessionToken') --profile $OUTPUT_PROFILE
+     - aws eks update-kubeconfig --name sourcekube3 --profile $OUTPUT_PROFILE
+     - lerna clean -y
+     - lerna bootstrap --include-dependencies
+     - lerna run resolve-links 
+    #  - kubectl delete jobs.batch --namespace $NAMESPACE database-migration --ignore-not-found
+    #  - kubectl apply -f database-migration.yaml --namespace=$NAMESPACE
+    #  - kubectl wait --for=condition=complete --timeout=600s job/database-migration -n $NAMESPACE
+     - lerna ls 
+     - lerna run docker:build 
+     - lerna run docker:push 
+     - lerna run kubectl:bootstrap_image
+     - lerna run kubectl:apply

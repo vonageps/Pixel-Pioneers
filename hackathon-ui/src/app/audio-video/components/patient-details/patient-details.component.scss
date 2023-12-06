@@ -1,0 +1,107 @@
+@import "../../../theme/styles/breakpoints";
+@import "../../../theme/styles/variables";
+:host {
+  width: 100%;
+  height: 100%;
+  .details-container {
+    padding: 10px;
+    .details-header {
+      .details-profile {
+        width: 80px;
+        margin-right: 10px;
+        height: 80px;
+        background-size: cover;
+        background-position: center top;
+      }
+      .details-profile {
+        .name {
+          font-size: 18px;
+          font-weight: 500;
+          padding: 5px;
+        }
+        .other {
+          font-size: 13px;
+          padding: 5px;
+        }
+        ul {
+          list-style: none;
+          display: flex;
+          align-items: center;
+          li {
+            padding: 3px 10px;
+            border-right: 1px solid #868686;
+            font-size: 13px;
+          }
+          :last-child {
+            border-right: none;
+          }
+        }
+      }
+    }
+    .details-content {
+      .patient-detail-tab {
+        border: 1px solid #d7d7d7;
+        border-radius: 5px;
+        padding: 10px;
+        ul {
+          list-style: none;
+          li.label {
+            color: #868686;
+            margin-top: 10px;
+            font-weight: 300;
+          }
+          li.value {
+            color: #5c5c5c;
+            font-weight: 300;
+          }
+        }
+      }
+      .prescription-details {
+        border-top: 1px solid #d7d7d7;
+        overflow: hidden;
+        ul {
+          list-style: none;
+          width: 100%;
+          li {
+            padding: 10px 15px;
+            border-bottom: 1px solid #d7d7d7;
+            width: 100%;
+            .title {
+              color: #5c5c5c;
+              font-size: 14px;
+            }
+            .description {
+              color: #b3b3b3;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .patient-document-tab {
+    .tab-header {
+      width: 80%;
+      padding-right: 50px;
+      position: relative;
+      z-index: 9;
+      .head {
+        width: 100%;
+        padding-right: 10px;
+      }
+      button {
+        border: none;
+        background: transparent;
+        position: absolute;
+        right: 0px;
+        top: 1px;
+        border-right: 1px solid rgba(0, 0, 0, 0.2);
+        padding-right: 15px;
+        z-index: 9;
+        .mat-icon {
+          height: 15px;
+        }
+      }
+    }
+  }
+}

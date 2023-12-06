@@ -1,0 +1,230 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: 'auth-facade'
+spec:
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+  type: NodePort
+  selector:
+    app: 'auth-facade'
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-facade
+  labels:
+    app: auth-facade
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-facade
+  template:
+    metadata:
+      labels:
+        app: auth-facade
+    spec:
+      tolerations:
+        - key: 'type'
+          operator: 'Equal'
+          value: 'hackathon-spot'
+          effect: 'NoSchedule'
+      containers:
+        - name: auth-facade
+          image: '{{ CONTAINER_IMAGE }}'
+          imagePullPolicy: Always
+
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /ping
+              port: 3000
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+            periodSeconds: 30
+
+          startupProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /ping
+              port: 3000
+            initialDelaySeconds: 10
+            timeoutSeconds: 3
+            periodSeconds: 10
+
+          resources:
+            limits:
+              memory: '1024Mi'
+              cpu: '1'
+            requests:
+              memory: '512Mi'
+              cpu: '375m'
+          ports:
+            - containerPort: 3000
+          env:
+            - name: LOG_LEVEL
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: LOG_LEVEL
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: JWT_SECRET
+            - name: JWT_ISSUER
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: JWT_ISSUER
+            - name: NODE_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: NODE_ENV
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DB_PORT
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DB_USER
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AUTH-SERVICE_DB_DATABASE
+            - name: DB_SCHEMA
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DB_SCHEMA
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DB_PASSWORD
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: REDIS_URL
+            - name: REDIRECT_LINK
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: REDIRECT_LINK
+            - name: TEMP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: TEMP_PASSWORD
+            - name: PATIENT_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: PATIENT_CLIENT_SECRET
+            - name: PATIENT_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: PATIENT_CLIENT_ID
+            - name: CRYPTO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: CRYPTO_SECRET_KEY
+            - name: CSP_SCRIPT_SRC_HASH
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: CSP_SCRIPT_SRC_HASH
+            - name: AUTH_SERVICE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AUTH_SERVICE_URL
+            - name: VIDEO_SERVICE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: VIDEO_SERVICE_URL
+            - name: VONAGE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: VONAGE_API_KEY
+            - name: VONAGE_API_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: VONAGE_API_SECRET
+            - name: AWS_S3_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AWS_S3_REGION
+            - name: AWS_S3_PHOTO_URL
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AWS_S3_PHOTO_URL
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AWS_ENDPOINT
+            - name: FILE_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: FILE_BUCKET
+            - name: VERIFICATION_BASEURL
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: VERIFICATION_BASEURL
+            - name: PROVIDER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: PROVIDER_USERNAME
+            - name: AWS_S3FORCEPATH
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: AWS_S3FORCEPATH
+            - name: DATA_EXTRACTOR_SERVICE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DATA_EXTRACTOR_SERVICE_URL
+            - name: ARCHIVE_VONAGE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: ARCHIVE_VONAGE_URL
+            

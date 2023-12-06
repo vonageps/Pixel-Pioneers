@@ -1,0 +1,84 @@
+// Theme Variables
+$bg-color: #f9fbff;
+$primary-theme-color: #00a19a;
+$secondary-theme-color: #156778;
+$theme-font-family: "Poppins", sans-serif;
+$body-text-color: #7e7f8c;
+$body-font-size: 14px;
+$white-color: #fff;
+$dark-gray-color: #363637;
+$shadow-color: rgba(0, 0, 0, 10%);
+$chart-count-color: #494a4d;
+$bg-row: #fcfcfc;
+$common-backdrop: rgba(0, 0, 0, 0.6);
+$bg-mobile-chat-header: #71cac6;
+
+// Login theme variables
+$login-container-bg: #f8f8f8;
+$login-left-bg-img-path: "/assets/images/login-left-bg.jpg";
+$common-bg: "/assets/images/bg-group.svg";
+$common-right-bg: "/assets/images/right-group-bg.svg";
+$login-left-bg-overlay: rgba(40, 46, 46, 0.8);
+$login-left-text-color: #a2a2a3;
+$theme-danger-color: #ed1c24;
+$theme-blue-v1: #2a96d4;
+$btn-light-primary: #ebf9f8;
+
+//for header
+
+$header-menu-seprator-color: #bebebe;
+// for Buttons
+$btn-e-primary-hover: #00716c;
+$btn-e-primary-active: #00716c;
+$btn-e-flat-primary-hover: rgba(227, 22, 91, 0.04);
+$btn-e-basic-color: #787878;
+$btn-e-basic-hover: #888888;
+$btn-e-disabled: rgba(0, 0, 0, 0.12);
+$btn-e-info: #253646;
+$btn-e-info-hover: #344556;
+$btn-e-info-active: #1b2c3b;
+$bg-common: #f9f9f9;
+$bg-name: #ebebeb;
+$btn-gray-1: #e3ebf1;
+$btn-status-green-font-color: #169793;
+
+$btn-status-green-bg: #e2f4f4;
+$btn-e-outlined-color: #707070;
+$btn-v2: #e3ebf1;
+
+// Dashboard card
+$border-color: #ebebeb;
+$light-gray: #919191;
+$h2-size: 30px;
+
+// Other colors
+$bg-ngx-loader: #fafbfd;
+$cancelled: #f68d91;
+$gray-1: #c1c5c7;
+$gray-2: #dfdfdf;
+$green-1: #22b24b;
+$warning-color: #fff3cd;
+$text-color-v2: #8d92a3;
+$color-sky-blue: #6ecee6;
+$tentative: #daa147;
+$alreadyPaid: #b8b8b8;
+$feeWaivedOff: #b8b8b8;
+$notApplicable: #b8b8b8;
+
+$draft: #6c6a66;
+$darft-bg: #ebebeb;
+
+//  colors
+$missed: #ca5f5d;
+$missed-background: #f3eaea;
+$confirmed: #204d7c;
+$confirm-background: #dde6f0;
+$completed-background: #e2f4f3;
+$completed: #489f9a;
+$tentative-background: #fff3cd;
+$bg-row-hover: #f2f6ff;
+$cancelled-background: #f3eaea;
+$sky-blue: #09cbd9;
+// Temp colors
+$color-dark-blue: #6e96e6;
+$color-orange: #fac6c8;

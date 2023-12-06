@@ -1,0 +1,32 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="mt-3">
+  <h1 mat-dialog-title class="custom-heading">{{ data.HeaderMessage }}</h1>
+</div>
+<div mat-dialog-content>
+  <p class="">{{ data.content }}</p>
+</div>
+
+<div
+  mat-dialog-content
+  fxLayout="row"
+  fxLayoutAlign="end center"
+  class="pop_footer"
+>
+  <button
+    id="ctc-discard"
+    *ngIf="data.leftButton !== 'none'"
+    (click)="onNoClick()"
+    type="button"
+    title="Close"
+    class="rounded btn-dialog-cancel mr-5"
+  >
+    {{ data.leftButton || 'Cancel' }}
+  </button>
+  <button
+    id="ctc-save"
+    *ngIf="data.rightButton !== 'none'"
+    [mat-dialog-close]="true"
+    class="rounded btn-dialog-light"
+  >
+    {{ data.rightButton || 'Ok' }}
+  </button>
+</div>

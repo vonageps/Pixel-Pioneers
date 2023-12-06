@@ -1,0 +1,75 @@
+{
+    "name": "AuthRest",
+    "connector": "rest",
+    "baseURL": "/auth",
+    "crud": true,
+    "options": {
+      "baseUrl": "AUTH_SERVICE_URL",
+      "headers": {
+        "accept": "application/json",
+        "content-type": "application/json"
+      }
+    },
+    "operations": [
+        {
+            "template": {
+              "method": "POST",
+              "url": "/auth/login-token",
+              "body": "{requestBody}"
+            },
+            "functions": {
+              "authLogin": ["requestBody"]
+            }
+          },
+          {
+            "template": {
+              "method": "GET",
+              "url": "/users/",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "query": {
+                "filter": "{filter}"
+              }
+            },
+            "functions": {
+              "getUsers": ["filter"]
+            }
+          },
+          {
+            "template": {
+              "method": "POST",
+              "url": "/users/",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "body": "{requestBody}"
+            },
+            "functions": {
+              "registerUser": ["requestBody"]
+            }
+          },
+          {
+            "template": {
+              "method": "PATCH",
+              "url": "/users",
+              "headers": {
+                "Authorization": "{token}"
+              },
+              "query": {
+                "where": "{where}"
+              },
+              "body": "{user}"
+            },
+            "functions": {
+              "updateUser":
+              [
+                 "user",
+                 "where",
+                 "token"
+              ]
+            }
+          }
+    ]
+  }
+  

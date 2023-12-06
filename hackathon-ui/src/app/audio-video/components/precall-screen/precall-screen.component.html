@@ -1,0 +1,243 @@
+<div *ngIf="deviceIncompatible">
+  <h1 class="text-center">
+    {{ message.OTDeviceIncompatiable }}
+  </h1>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex="100">
+  <div class="mb-3" fxFlex="100" fxLayout="row wrap" class="brand-header">
+    <div
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+      fxFlex="50"
+      fxFlex.gt-xs="50"
+    >
+      <div
+        fxFlex="100"
+        fxFlex.gt-xs="50"
+        appearance="standard"
+        class="brand-container"
+      >
+        <img
+          src="assets/images/logo.svg"
+          class="img-responsive telescope-brand"
+          alt=""
+        />
+      </div>
+    </div>
+    <div
+      fxFlex="50"
+      fxFlex.gt-xs="50"
+      fxLayoutAlign="end center"
+      appearance="standard"
+      *ngIf="false"
+    >
+      <div class="call-duration">
+        <span>
+          <img
+            src="assets/images/svg/clock.svg"
+            class="img-responsive telescope-brand"
+            alt="" /></span
+        >Call Duration 00h 52m
+      </div>
+    </div>
+  </div>
+  <div
+    fxFlex="100"
+    fxLayout="row wrap"
+    fxLayoutAlign="center center"
+    class="main-body-container"
+  >
+    <div
+      class="mb-2"
+      class="join-section"
+      fxFlex="100"
+      fxFlex.gt-sm="60"
+      fxLayout="row wrap"
+      fxLayoutAlign="center center"
+    >
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100">
+        <div
+          fxFlex="100"
+          fxFlex.gt-xs="50"
+          appearance="standard"
+          fxLayoutAlign.gt-xs="start center"
+          fxLayoutAlign.lt-sm="center center"
+        >
+          <p></p>
+        </div>
+        <div
+          fxFlex="100"
+          fxFlex.gt-xs="50"
+          fxLayoutAlign.gt-xs="end center"
+          fxLayoutAlign.lt-sm="center center"
+          ngClass.lt-sm="mt-2"
+        >
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="proceed()"
+            id="ps-joinCall"
+            [disabled]="disableJoinButton()"
+            class="btn-common"
+          >
+            Join Call
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="!deviceIncompatible"
+      class="device-content mt-3"
+      fxLayout="row wrap"
+      fxLayoutAlign="center center"
+      fxFlex="100"
+    >
+      <div
+        fxLayout="row wrap"
+        fxLayoutAlign="center center"
+        fxFlex="100"
+        fxFlex.gt-sm="60"
+      >
+        <div
+          fxFlex="100"
+          fxFlex.gt-sm="100"
+          fxLayoutAlign="start center"
+          appearance="standard"
+        >
+          <div class="video-screen" fxFlex="100">
+            <app-publisher
+              #publisher
+              [session]="session"
+              [mic]="event?.audio"
+              [video]="event?.video"
+              id="ps-publisher"
+            ></app-publisher>
+          </div>
+        </div>
+        <div
+          fxFlex="100"
+          fxFlex.gt-sm="100"
+          appearance="standard"
+          fxLayout="row wrap"
+        >
+          <div fxLayout="row wrap">
+            <div class="precall-message">
+              <p>Please check your settings before joining the call!</p>
+            </div>
+          </div>
+          <div fxFlex="100" fxLayout="row wrap" *ngIf="controlForm">
+            <form
+              fxFlex="100"
+              fxLayout="row wrap"
+              [formGroup]="controlForm"
+              #controlFormNew="ngForm"
+              novalidate
+              fxLayoutGap="10"
+            >
+              <div
+                fxLayout="row wrap"
+                fxLayoutAlign="space-around start"
+                fxFlex="100"
+                fxFlex.gt-xs="calc(50% - 10px)"
+                class="w-100 device-select"
+              >
+                <div
+                  fxFlex="100"
+                  appearance="standard"
+                  *ngIf="event.videoDeviceId"
+                >
+                  <div appearance="standard">
+                    <button
+                      id="ps-cam"
+                      (click)="videoToggle()"
+                      class="btn-action"
+                    >
+                      <mat-icon
+                        [svgIcon]="event.video ? 'video' : 'video-off'"
+                      ></mat-icon>
+                    </button>
+                  </div>
+                  <mat-form-field
+                    appearance="outline"
+                    fxFlex="100"
+                    class="device-dropdown"
+                  >
+                    <mat-label>Video Device</mat-label>
+                    <mat-select>
+                      <mat-option
+                        *ngFor="let option of videoDevices"
+                        [value]="option.deviceId"
+                      >
+                        {{ option.label }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div
+                fxLayout="row wrap"
+                fxFlex="100"
+                fxFlex.gt-xs="calc(50% - 10px)"
+                fxLayoutAlign="space-around start"
+                class="w-100 device-select"
+              >
+                <div fxFlex="100" appearance="standard">
+                  <div appearance="standard">
+                    <button
+                      id="ps-mic"
+                      (click)="micToggle()"
+                      class="btn-action"
+                    >
+                      <mat-icon
+                        [svgIcon]="event.audio ? 'mic' : 'mic-muted'"
+                      ></mat-icon>
+                    </button>
+                  </div>
+                  <mat-form-field
+                    appearance="outline"
+                    fxFlex="100"
+                    class="device-dropdown"
+                  >
+                    <mat-label>Microphone</mat-label>
+                    <mat-select>
+                      <mat-option
+                        *ngFor="let option of audioDevices"
+                        [value]="option.deviceId"
+                      >
+                        {{ option.label }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div
+                fxLayout="row wrap"
+                fxFlex="100"
+                fxLayoutAlign="start start"
+                class="w-100 device-select"
+                *ngIf="false && event.audioOutputDeviceId"
+              >
+                <div fxFlex="80" appearance="standard">
+                  <telescope-dropdown
+                    class="multiple-select"
+                    [dropdownItems]="audioOutputDevices"
+                    [dropdownFields]="{
+                      text: 'label',
+                      value: 'deviceId'
+                    }"
+                    [dropdownId]="'ps-audioOutputDevice'"
+                    [dropwdownPlaceholder]="'Speaker'"
+                    [dropwdownName]="'speaker'"
+                    [dropwdownError]="'Speaker is required'"
+                    [controlName]="'audioOutputDeviceId'"
+                    [parentFormGroup]="controlForm"
+                  ></telescope-dropdown>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

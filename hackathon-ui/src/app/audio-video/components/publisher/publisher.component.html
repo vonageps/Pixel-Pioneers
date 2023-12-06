@@ -1,0 +1,32 @@
+<div
+  class="publishing"
+  #publisherDiv
+  [ngClass]="userSpeaking ? 'speaking' : ''"
+></div>
+
+<div class="user-data">
+  <div class="container-box">
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="100">
+      <div fxFlex="100" appearance="standard" fxLayoutAlign="start center">
+        <div class="soundwave-outer-container" *ngIf="userSpeaking">
+          <div
+            class="soundwave-container"
+            id="ani-container"
+            [ngClass]="userSpeaking ? 'speaking' : ''"
+          >
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+            <div class="bar bar-3"></div>
+            <div class="bar bar-4"></div>
+            <div class="bar bar-5"></div>
+            <div class="bar bar-6"></div>
+          </div>
+        </div>
+        <div class="icon-background" *ngIf="!userSpeaking">
+          <mat-icon [svgIcon]="micIcon ? 'mic' : 'mic-muted'"></mat-icon>
+        </div>
+        <div class="username">{{ userName }}</div>
+      </div>
+    </div>
+  </div>
+</div>

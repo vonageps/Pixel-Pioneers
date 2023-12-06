@@ -1,0 +1,22 @@
+{
+    "defaultEnv": "master",
+    "master": {
+      "driver": "pg",
+      "host": {
+        "ENV": "VIDEO-CONFERENCING-SERVICE_DB_HOST"
+      },
+      "port": {
+        "ENV": "VIDEO-CONFERENCING-SERVICE_DB_PORT"
+      },
+      "user": {
+        "ENV": "VIDEO-CONFERENCING-SERVICE_DB_USER"
+      },
+      "password": {
+        "ENV": "VIDEO-CONFERENCING-SERVICE_DB_PASSWORD"
+      },
+      "database": {
+        "ENV": "VIDEO-CONFERENCING-SERVICE_DB_DATABASE"
+      }
+    },
+    "sql-file": true
+}

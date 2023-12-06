@@ -1,0 +1,22 @@
+{
+    "defaultEnv": "master",
+    "master": {
+      "driver": "pg",
+      "host": {
+        "ENV": "SCHEDULER-SERVICE_DB_HOST"
+      },
+      "port": {
+        "ENV": "SCHEDULER-SERVICE_DB_PORT"
+      },
+      "user": {
+        "ENV": "SCHEDULER-SERVICE_DB_USER"
+      },
+      "password": {
+        "ENV": "SCHEDULER-SERVICE_DB_PASSWORD"
+      },
+      "database": {
+        "ENV": "SCHEDULER-SERVICE_DB_DATABASE"
+      }
+    },
+    "sql-file": true
+}

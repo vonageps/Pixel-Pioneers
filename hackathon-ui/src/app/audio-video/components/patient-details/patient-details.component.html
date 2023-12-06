@@ -1,0 +1,151 @@
+<div>
+  <div
+    fxLayout="row wrap"
+    fxLayoutAlign="start"
+    fxFlex="100"
+    class="details-container"
+  >
+    <div
+      fxLayout="row wrap"
+      fxLayoutAlign="start"
+      fxFlex="100"
+      class="details-header"
+    >
+      <div
+        fxLayout="row wrap"
+        fxLayoutAlign="start"
+        fxFlex="80px"
+        class="details-profile"
+        style="background-image: url('assets/images/user.svg')"
+      ></div>
+      <div
+        fxLayout="row wrap"
+        fxLayoutAlign="start"
+        fxFlex="calc(100% - 110px)"
+        class="details-profile"
+      >
+        <div>
+          <p class="name">Saskhi Sharma</p>
+          <p class="other">sakshi.sharma@yopmail.com</p>
+          <ul>
+            <li>Female</li>
+            <li>27 Yrs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div
+      fxLayout="row wrap"
+      fxLayoutAlign="start"
+      fxFlex="100"
+      class="details-content mt-10"
+    >
+      <mat-tab-group fxFlex="100">
+        <mat-tab label="Patient Details">
+          <div
+            fxLayout="row wrap"
+            fxLayoutAlign="start"
+            fxFlex="100"
+            class="patient-detail-tab mt-3"
+          >
+            <ul>
+              <li class="label">DOB</li>
+              <li class="value">Feb 23, 1999</li>
+              <li class="label">Contact No.</li>
+              <li class="value">+12342345678</li>
+              <li class="label">Address</li>
+              <li class="value">
+                789 Oak Road, Unit 15C, Evergreen Gardens, Suburbia, USA, 54321
+              </li>
+              <li class="label">Preferred Chat Language</li>
+              <li class="value">English</li>
+            </ul>
+          </div>
+        </mat-tab>
+        <mat-tab label="Documents">
+          <div
+            fxLayout="row wrap"
+            fxLayoutAlign="start"
+            fxFlex="100"
+            class="patient-document-tab mt-3"
+          >
+            <mat-accordion fxFlex="100">
+              <mat-expansion-panel
+                (opened)="panelOpenState = true"
+                (closed)="panelOpenState = false"
+              >
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <div class="tab-header">
+                      <div class="head">Prescription 1</div>
+                      <button (click)="openDocument()">
+                        <mat-icon svgIcon="view"></mat-icon>
+                      </button>
+                    </div>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div
+                  fxLayout="row wrap"
+                  fxLayoutAlign="start"
+                  fxFlex="100"
+                  class="prescription-details"
+                >
+                  <ul>
+                    <li>
+                      <div class="title">Metformin-Alogliptin, 100mg</div>
+                      <div class="description">1 time a week</div>
+                    </li>
+                    <li>
+                      <div class="title">Metformin-Alogliptin, 100mg</div>
+                      <div class="description">1 time a week</div>
+                    </li>
+                    <li>
+                      <div class="title">Metformin-Alogliptin, 100mg</div>
+                      <div class="description">1 time a week</div>
+                    </li>
+                  </ul>
+                </div>
+              </mat-expansion-panel>
+              <mat-expansion-panel
+                (opened)="panelOpenState = true"
+                (closed)="panelOpenState = false"
+              >
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <div class="tab-header">
+                      <div class="head">Prescription 2</div>
+                      <button (click)="openDocument()">
+                        <mat-icon svgIcon="view"></mat-icon>
+                      </button>
+                    </div>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div
+                  fxLayout="row wrap"
+                  fxLayoutAlign="start"
+                  fxFlex="100"
+                  class="prescription-details"
+                >
+                  <ul>
+                    <li>
+                      <div class="title">Metformin-Alogliptin, 100mg</div>
+                      <div class="description">1 time a week</div>
+                    </li>
+                    <li>
+                      <div class="title">Metformin-Alogliptin, 100mg</div>
+                      <div class="description">1 time a week</div>
+                    </li>
+                    <li>
+                      <div class="title">Metformin-Alogliptin, 100mg</div>
+                      <div class="description">1 time a week</div>
+                    </li>
+                  </ul>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

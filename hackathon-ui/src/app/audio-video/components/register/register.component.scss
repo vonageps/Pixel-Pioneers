@@ -1,0 +1,150 @@
+@import "../../../theme/styles/breakpoints";
+@import "../../../theme/styles/variables";
+:host {
+  height: 100vh;
+  width: 100%;
+  background: #f8f9fa;
+  display: block;
+  .call-header {
+    background: transparent;
+    height: 70px;
+    background: #fff;
+    @include media-breakpoint-down(sm) {
+      height: 100%;
+    }
+    img {
+      height: 100%;
+    }
+    ul {
+      list-style-type: none;
+      padding: 5px 20px;
+      border-bottom-left-radius: 15px;
+      display: flex;
+      align-items: center;
+      height: 80%;
+      @include media-breakpoint-down(md) {
+        padding: 0;
+        margin-top: 5px;
+      }
+      li {
+        display: flex;
+        padding: 2px 10px;
+        border-right: 1px solid $bg-name;
+        position: relative;
+        min-width: 60px;
+        text-align: center;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        max-width: 50%;
+        @include media-breakpoint-down(sm) {
+          height: 50px;
+        }
+        button {
+          background: transparent;
+          border: 0;
+        }
+        button.time {
+          line-height: auto;
+        }
+        img {
+          height: 100%;
+        }
+      }
+      :first-child {
+        padding-left: 0;
+      }
+      li.publisher-info-top {
+        span {
+          position: absolute;
+          font-size: 18px;
+          bottom: 0px;
+          right: -5px;
+          color: $primary-theme-color;
+        }
+        .mat-icon {
+          position: absolute;
+          right: 16px;
+          bottom: 5px;
+        }
+      }
+      li:last-child {
+        border-right: none;
+      }
+      li:first-child {
+        @include media-breakpoint-down(md) {
+          padding-left: 0;
+        }
+      }
+      li.user-count {
+        position: relative;
+        .mat-icon {
+          position: relative;
+          overflow: visible;
+          span {
+            position: absolute;
+            right: -10px;
+            width: 22px;
+            height: 22px;
+            background: $primary-theme-color;
+            border-radius: 100%;
+            padding: 5px;
+            color: $white-color;
+            top: -12px;
+            font-size: 11px;
+            line-height: 14px;
+          }
+        }
+      }
+      li.chat-notification {
+        position: relative;
+        button {
+          position: relative;
+          span {
+            position: absolute;
+            right: 0;
+            width: 5px;
+            height: 5px;
+            background: $primary-theme-color;
+            border-radius: 100%;
+            padding: 5px;
+            color: $white-color;
+            top: 1px;
+            font-size: 11px;
+            line-height: 14px;
+          }
+        }
+      }
+    }
+    .call-duration {
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      @include media-breakpoint-down(md) {
+        font-size: 13px;
+        padding: 0 5px;
+      }
+      span {
+        margin-right: 5px;
+        margin-top: 3px;
+      }
+    }
+  }
+  .form-outer-container {
+    height: calc(100% - 70px);
+  }
+  .register-container {
+    padding: 15px;
+    background: $white-color;
+    border-radius: 10px;
+    box-shadow: 0px 3.5px 5.5px 0px #00000029;
+    .register-header {
+      h3 {
+        padding: 10px 0;
+        font-size: 22px;
+        font-weight: 400;
+        color: $secondary-theme-color;
+      }
+    }
+  }
+}

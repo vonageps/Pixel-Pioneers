@@ -1,0 +1,153 @@
+@import "../../../theme/styles/variables";
+@import "../../../theme/styles/breakpoints";
+
+:host {
+  width: 100%;
+  display: block;
+  height: 100%;
+  .brand-container {
+    padding: 6px 10px;
+    @include media-breakpoint-up(lg) {
+      padding: 6px 10px;
+    }
+    img {
+      max-width: 100%;
+    }
+  }
+  .precall-message {
+    h1,
+    p {
+      margin-top: 10px 0;
+    }
+    p {
+      font-size: 20px;
+      margin: 10px 0;
+      @include media-breakpoint-down(xxl) {
+        font-size: 16px;
+      }
+      @include media-breakpoint-down(lg) {
+        font-size: 15px;
+      }
+    }
+    h1 {
+      font-size: 35px;
+      @include media-breakpoint-down(xxxl) {
+        font-size: 28px;
+        font-weight: 600;
+      }
+      @include media-breakpoint-down(lg) {
+        font-size: 18px;
+        margin-top: 20px;
+      }
+    }
+  }
+  .footer-message {
+    p {
+      color: $secondary-theme-color;
+      font-size: 20px;
+      margin-top: 10px;
+      @include media-breakpoint-down(xxl) {
+        font-size: 16px;
+      }
+      @include media-breakpoint-down(lg) {
+        font-size: 16px;
+      }
+      @include media-breakpoint-down(sm) {
+        font-size: 13px;
+      }
+    }
+  }
+  .btn-action {
+    background: #f8f9fa;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: none;
+    height: 56.5px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 9;
+    border-top: 1px solid rgba(0, 0, 0, 0.38);
+    border-left: 1px solid rgba(0, 0, 0, 0.38);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.38);
+    @include media-breakpoint-down(lg) {
+      display: inline-block;
+      float: right;
+    }
+  }
+  .video-screen {
+    aspect-ratio: 16/11;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: $bg-name;
+    position: relative;
+    height: calc(100vh - 300px);
+    @include media-breakpoint-down(md) {
+      height: auto;
+      width: 100%;
+    }
+  }
+  .brand-header {
+    height: 70px;
+    background: #fff;
+    @include media-breakpoint-up(xxxl) {
+      height: 90px;
+    }
+    .brand-container {
+      height: 100%;
+      img {
+        height: 100%;
+      }
+    }
+  }
+  .call-duration {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    @include media-breakpoint-down(md) {
+      font-size: 12px;
+    }
+    img {
+      height: auto;
+      margin-right: 5px;
+      margin-top: 3px;
+    }
+  }
+  .device-content {
+    height: auto;
+    overflow: auto;
+    @include media-breakpoint-down(lg) {
+      padding: 20px;
+    }
+    @include media-breakpoint-down(md) {
+      padding: 20px;
+    }
+    @include media-breakpoint-down(sm) {
+      padding: 10px;
+    }
+  }
+  .device-select {
+    margin: 10px 0;
+    @include media-breakpoint-up(xxl) {
+      margin: 12px 0;
+    }
+    @include media-breakpoint-up(xxxl) {
+      margin: 15px 0;
+    }
+  }
+  .main-body-container {
+    height: calc(100vh - 70px);
+    overflow: auto;
+    background: #f8f9fa;
+  }
+  .device-dropdown {
+    margin-left: 47px;
+  }
+  .join-section {
+    @include media-breakpoint-down(lg) {
+      padding: 20px;
+    }
+  }
+}

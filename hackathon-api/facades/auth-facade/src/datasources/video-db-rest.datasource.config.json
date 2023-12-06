@@ -1,0 +1,83 @@
+{
+    "name": "VideoDbRest",
+    "connector": "rest",
+    "baseURL": "",
+    "crud": true,
+    "options": {
+      "baseUrl": "VIDEO_SERVICE_URL",
+      "headers": {
+        "accept": "application/json",
+        "content-type": "application/json"
+      }
+    },
+    "operations": [
+        {
+            "template": {
+              "method": "POST",
+              "url": "/session",
+              "headers": {
+                "content-type": "application/json",
+                "Authorization": "{token}"
+              },
+              "body": "{requestBody}"
+            },
+            "functions": {
+              "createJoinCallLink": [
+                "requestBody",
+                "token"
+              ]
+            }
+          },
+          {
+            "template": {
+              "method": "POST",
+              "url": "/session/{meetingLinkId}/token",
+              "headers": {
+                "content-type": "application/json",
+                "Authorization": "{token}"
+              },
+              "body": "{requestBody}"
+            },
+            "functions": {
+              "getTokenDetail": [
+                "meetingLinkId",
+                "requestBody",
+                "token"
+              ]
+            }
+          },
+    {
+      "template": {
+        "method": "PATCH",
+        "url": "/session/{meetingLinkId}/end",
+        "headers": {
+          "content-type": "application/json",
+          "Authorization": "{token}"
+        }
+      },
+      "functions": {
+        "endVideoConferencing": [
+          "meetingLinkId",
+          "token"
+        ]
+      }
+    },
+    {
+      "template": {
+        "method": "GET",
+        "url": "/archives/{archiveId}",
+        "headers": {
+          "content-type": "application/json",
+          "Authorization": "{token}"
+        }
+      },
+      "functions": {
+        "getArchive": [
+          "archiveId",
+          "token"
+        ]
+      }
+    }
+    ]
+  }
+  

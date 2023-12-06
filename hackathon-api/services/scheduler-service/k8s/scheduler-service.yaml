@@ -1,0 +1,124 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: 'scheduler-service'
+spec:
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+  type: NodePort
+  selector:
+    app: 'scheduler-service'
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scheduler-service
+  labels:
+    app: scheduler-service
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scheduler-service
+  template:
+    metadata:
+      labels:
+        app: scheduler-service
+    spec:
+      tolerations:
+        - key: 'type'
+          operator: 'Equal'
+          value: 'hackathon-spot'
+          effect: 'NoSchedule'
+      containers:
+        - name: scheduler-service
+          image: '{{ CONTAINER_IMAGE }}'
+          imagePullPolicy: Always
+
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /ping
+              port: 3000
+            initialDelaySeconds: 10
+            timeoutSeconds: 3
+            periodSeconds: 10
+
+          startupProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /ping
+              port: 3000
+            initialDelaySeconds: 10
+            timeoutSeconds: 3
+            periodSeconds: 10
+
+          resources:
+            limits:
+              memory: '1024Mi'
+              cpu: '1'
+            requests:
+              memory: '512Mi'
+              cpu: '375m'
+          ports:
+            - containerPort: 3000
+          env:
+            - name: LOG_LEVEL
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: LOG_LEVEL
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: JWT_SECRET
+            - name: JWT_ISSUER
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: JWT_ISSUER
+            - name: NODE_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: NODE_ENV
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DB_PORT
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DB_USER
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DB_DATABASE
+            - name: DB_SCHEMA
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DB_SCHEMA
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: DB_PASSWORD
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: hackathon-secret
+                  key: REDIS_URL

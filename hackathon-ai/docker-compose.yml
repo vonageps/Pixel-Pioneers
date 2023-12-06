@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+ care-connect:
+  image: care-connect
+  container_name: care-connect
+  build:
+    dockerfile: Dockerfile
+  ports:
+    - "80:80"
+  env_file:
+    - ./.env

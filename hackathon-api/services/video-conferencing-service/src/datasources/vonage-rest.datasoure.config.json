@@ -1,0 +1,35 @@
+{
+  "name": "vonageRest",
+  "connector": "rest",
+  "baseURL": "",
+  "crud": true,
+  "options": {
+    "baseUrl": "VONAGE_BASEURL",
+    "headers": {
+      "accept": "application/json",
+      "content-type": "application/json"
+    }
+  },
+  "operations": [
+    {
+      "template": {
+        "method": "POST",
+        "url": "/verify/json",
+        "form": "{body}"
+      },
+      "functions": {
+        "sendOtp": ["body"]
+      }
+    },
+    {
+      "template": {
+        "method": "POST",
+        "url": "/verify/check/json",
+        "form": "{body}"
+      },
+      "functions": {
+        "verifyOtp": ["body"]
+      }
+    }
+  ]
+}

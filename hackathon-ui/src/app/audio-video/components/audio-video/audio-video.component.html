@@ -1,0 +1,243 @@
+<div class="full-screen" *ngIf="session">
+  <div class="call-header">
+    <div fxLayout="row wrap" fxLayoutAlign="start" fxFill fxFlex="1 0 auto">
+      <div
+        fxFlex="50"
+        fxFlex.gt-xs="50"
+        appearance="standard"
+        ngClass.gt-xs="px-5"
+        class="brand-container"
+      >
+        <ul>
+          <li>
+            <img
+              src="assets/images/logo.svg"
+              class="img-responsive telescope-brand"
+              alt=""
+            />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-100" *ngIf="session">
+    <div
+      fxLayout="row wrap"
+      fxLayoutAlign="start"
+      fxFlex="100"
+      class="p-2 main-body"
+    >
+      <div class="flex-100">
+        <div class="call-body">
+          <div fxLayout="row" fxLayoutAlign="start" fxFill fxFlex="1 0 auto">
+            <div
+              fxFlex="100"
+              fxFlex.gt-md="75"
+              appearance="standard"
+              class="screen-container {{ screenOption }}"
+            >
+              <div
+                id="screen-preview"
+                class="screen-share-preview"
+                #parentScreenPreview
+              >
+                <h4 class="share-user">{{ presenterName }} Sharing Screen</h4>
+                <div class="presenting-screen" id="presentingScreen">
+                  <div class="screen-action">
+                    <h6>You're Presenting Screen</h6>
+                    <div class="mb-2">
+                      <button
+                        ejs-button
+                        isPrimary="true"
+                        cssClass="rounded"
+                        class="stop-sharing"
+                        (click)="stopScreenShare()"
+                        id="av-screenStop"
+                      >
+                        Stop Sharing
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="screen-sharing-main"
+                  [ngClass]="
+                    screenSubs ? 'screen-share-container' : 'display-none'
+                  "
+                ></div>
+              </div>
+            </div>
+            <div
+              fxFlex="100"
+              fxFlex.gt-md="{{ boxWidth }}"
+              appearance="standard"
+              fxFill
+              class="caller-containers {{
+                screenSubs || screenshareIcon
+                  ? 'screen-share-enable'
+                  : 'screen-share-disable'
+              }}"
+            >
+              <div
+                class="caller-row {{
+                  streams.length > 1
+                    ? 'align-items-center '
+                    : 'align-items-start'
+                }}"
+                id="caller-row"
+              >
+                <div class="publisher coller-item {{ cssClass }}">
+                  <div class="coller-content">
+                    <app-publisher
+                      #publisher
+                      [session]="session"
+                      [mic]="sessionData?.audio"
+                      [video]="sessionData?.video"
+                      [micDevice]="sessionData?.audioDeviceId"
+                      [videoDevice]="sessionData?.videoDeviceId"
+                      style="width: 100%; display: block; height: 100%"
+                    ></app-publisher>
+                  </div>
+                </div>
+                <ng-container>
+                  <div
+                    class="coller-item {{ cssClass }} subscriber"
+                    id="av-callerItem"
+                  >
+                    <div class="coller-content">
+                      <!-- <app-subscriber
+                        [stream]="stream"
+                        [session]="session"
+                        style="width: 100%; display: block; height: 100%"
+                      ></app-subscriber> -->
+                      <app-publisher
+                        #publisher
+                        [session]="session"
+                        [mic]="sessionData?.audio"
+                        [video]="sessionData?.video"
+                        [micDevice]="sessionData?.audioDeviceId"
+                        [videoDevice]="sessionData?.videoDeviceId"
+                        style="
+                          width: 100%;
+                          display: block;
+                          height: 100%;
+                          display: none;
+                        "
+                        [humanBot]="true"
+                      ></app-publisher>
+                      <video
+                        style="
+                          width: 100%;
+                          display: block;
+                          height: 100%;
+                          background-color: #333;
+                        "
+                        webkit-playsinline
+                        playsinline
+                        crossorigin="use-credentials"
+                        id="myvideo"
+                        class="video-full"
+                        autoplay
+                      ></video>
+                      <!-- <br /><br />
+                    <button id="connect" (click)="startCall()">Connect</button>
+                    <button
+                      id="disconnect"
+                      style="margin-left: 10px"
+                      (click)="endCall()"
+                      disabled
+                    >
+                      Disconnect
+                    </button>
+                    <br /><br /> -->
+                      <!-- <input
+												type="text"
+												id="msg"
+												placeholder="enter message here"
+											/>
+											<button id="send" (click)="sendMessageToAvatar()">
+												Send
+											</button> -->
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <app-patient-details
+              *ngIf="userDetails"
+              class="patient-details"
+              fxFlex="300px"
+            ></app-patient-details>
+            <app-transcription
+              *ngIf="showtranscription"
+              class="transcription-main-container"
+              fxFlex="300px"
+            ></app-transcription>
+          </div>
+        </div>
+        <div class="call-footer">
+          <button id="av-mic">
+            <mat-icon svgIcon="users" (click)="getUserDetails()"></mat-icon>
+          </button>
+          <button id="av-mic" class="">
+            <mat-icon
+              svgIcon="message-square"
+              (click)="getTranscription()"
+              class="p-2"
+            ></mat-icon>
+          </button>
+          <button (click)="micToggle()" id="av-mic">
+            <mat-icon
+              [svgIcon]="sessionData.audio ? 'mic' : 'mic-muted'"
+            ></mat-icon>
+          </button>
+          <button (click)="videoToggle()" id="av-cam">
+            <mat-icon
+              [svgIcon]="sessionData.video ? 'video' : 'video-off'"
+            ></mat-icon>
+          </button>
+          <!-- <button
+            (click)="opencopylinkDialog()"
+            *ngIf="checkIsExternalUserAllowed()"
+            id="av-addUser"
+          >
+            <mat-icon svgIcon="add-user"></mat-icon>
+          </button> -->
+          <!-- <button (click)="screenshare()" id="av-screenshare">
+						<mat-icon
+							[svgIcon]="screenSharing ? 'share' : 'share-off'"
+						></mat-icon>
+					</button> -->
+          ​
+          <div class="footer-right">
+            <button
+              ejs-button
+              isPrimary="true"
+              cssClass="rounded ml-5"
+              class="end-button"
+              (click)="disconnect()"
+              id="av-callDisconnect"
+            >
+              <mat-icon svgIcon="meeting-end"></mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <app-suggestion-popup
+          fxFlex="300px"
+          *ngIf="prescription"
+          class="prescription-pop"
+        ></app-suggestion-popup>
+        <!-- <app-incoming-box
+          fxFlex="300px"
+          fxLayout="row wrap"
+          fxLayoutAlign="center center"
+          class="incoming-box"
+          *ngIf="joiningRing"
+        >
+        </app-incoming-box> -->
+      </div>
+    </div>
+  </div>
+</div>

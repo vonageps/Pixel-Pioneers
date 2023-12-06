@@ -1,0 +1,25 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "es2020",
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@care/core/*": ["src/app/core/*"],
+      "@care/shared/*": ["src/app/shared/*"],
+      "@care/env/*": ["src/environments/*"],
+      "@care/theme/*": ["src/app/theme/*"]
+    },
+    "useDefineForClassFields": false
+  }
+}

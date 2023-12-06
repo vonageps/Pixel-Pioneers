@@ -1,0 +1,156 @@
+<div
+  fxLayout="row wrap"
+  fxFlex="100"
+  fxLayoutAlign="space-around start"
+  class="w-100"
+>
+  <div
+    fxLayout="row wrap"
+    fxFlex="100"
+    fxLayoutAlign="space-around start"
+    class="content-header"
+  >
+    <div
+      fxFlex="100"
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+      class="content-container bottom-hr"
+    >
+      <h1 fxFlex="85" class="custom-heading mb-3 px-5">
+        Audio and video settings
+      </h1>
+      <button
+        fxFlex="15"
+        fxLayoutAlign="center center"
+        [mat-dialog-close]="false"
+        class="close-button btn-transparent"
+        id="ccd-close"
+      >
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div
+    FxFlex="100"
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+    class="px-5 mt-8"
+    *ngIf="controlForm"
+  >
+    <form
+      fxFlex="100"
+      fxLayout="row wrap"
+      [formGroup]="controlForm"
+      #controlFormNew="ngForm"
+      novalidate
+    >
+      <div
+        fxLayout="row wrap"
+        fxLayoutAlign="space-around start"
+        fxFlex="100"
+        class="w-100 device-select"
+      >
+        <div fxFlex="80" appearance="standard" *ngIf="event.videoDeviceId">
+          <telescope-dropdown
+            class="multiple-select"
+            [dropdownItems]="videoDevices"
+            [dropdownFields]="{
+              text: 'label',
+              value: 'deviceId'
+            }"
+            [dropdownId]="'ps-videoDevice'"
+            [dropwdownPlaceholder]="'Video Device'"
+            [dropwdownName]="'videoDevice'"
+            [dropwdownError]="'Video device is required'"
+            [controlName]="'videoDeviceId'"
+            [parentFormGroup]="controlForm"
+          ></telescope-dropdown>
+        </div>
+        <div fxFlex="20" appearance="standard">
+          <button id="ps-cam" (click)="videoToggle()" class="btn-action">
+            <mat-icon
+              [svgIcon]="event.video ? 'video' : 'video-off'"
+            ></mat-icon>
+          </button>
+        </div>
+      </div>
+      <div
+        fxLayout="row wrap"
+        fxFlex="100"
+        fxLayoutAlign="space-around start"
+        class="w-100 device-select"
+      >
+        <div
+          fxFlex="80"
+          appearance="standard"
+          *ngIf="audioDevices && event.audioDeviceId"
+        >
+          <telescope-dropdown
+            class="multiple-select"
+            [dropdownItems]="audioDevices"
+            [dropdownFields]="{
+              text: 'label',
+              value: 'deviceId'
+            }"
+            [dropdownId]="'ps-audioDevice'"
+            [dropwdownPlaceholder]="'Microphone'"
+            [dropwdownName]="'microphone'"
+            [dropwdownError]="'Microphone is required'"
+            [controlName]="'audioDevice'"
+            [parentFormGroup]="controlForm"
+          ></telescope-dropdown>
+        </div>
+        <div fxFlex="20" appearance="standard">
+          <button id="ps-mic" (click)="micToggle()" class="btn-action">
+            <mat-icon [svgIcon]="event.audio ? 'mic' : 'mic-muted'"></mat-icon>
+          </button>
+        </div>
+      </div>
+      <div
+        fxLayout="row wrap"
+        fxFlex="100"
+        fxLayoutAlign="start start"
+        class="w-100 device-select"
+      >
+        <div
+          fxFlex="80"
+          appearance="standard"
+          *ngIf="event.audioOutputDeviceId"
+        >
+          <telescope-dropdown
+            class="multiple-select"
+            [dropdownItems]="audioOutputDevices"
+            [dropdownFields]="{
+              text: 'label',
+              value: 'deviceId'
+            }"
+            [dropdownId]="'ps-audioOutputDevice'"
+            [dropwdownPlaceholder]="'Speaker'"
+            [dropwdownName]="'speaker'"
+            [dropwdownError]="'Speaker is required'"
+            [controlName]="'audioOutputDeviceId'"
+            [parentFormGroup]="controlForm"
+          ></telescope-dropdown>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div
+    FxFlex="100"
+    fxLayout="row wrap"
+    fxLayoutAlign="end center"
+    class="mb-3 mt-5 px-5 w-100"
+  >
+    <button
+      ejs-button
+      cssClass="e-primary e-control e-btn rounded medium px-5 custom-button"
+      type="button"
+      title="Apply"
+      (click)="setDevice()"
+      [mat-dialog-close]="event"
+      id="ccd-save"
+    >
+      Done
+    </button>
+  </div>
+</div>
